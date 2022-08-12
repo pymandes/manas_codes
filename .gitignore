@@ -275,3 +275,7 @@ manas_codes/media/
 .env
 .envs/*
 !.envs/.local/
+Presento/
+*-venv/
+*.db
+.envs/

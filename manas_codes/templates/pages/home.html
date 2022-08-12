@@ -1,1 +1,679 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load static i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!-- ======= Intro Section ======= -->
+<section id="intro">
+  <div class="intro-container">
+    <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+      <ol class="carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+
+        <div class="carousel-item active" style="background-image: url('static/img/intro-carousel/1.jpg')">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">We are professional</h2>
+              <p class="animate__animated animate__fadeInUp">If you have an idea we will shape it for you.</p>
+              <a href="#featured-services" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                Started</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url('static/img/intro-carousel/2.jpg')">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Believe what you see!</h2>
+              <p class="animate__animated animate__fadeInUp">If you have a vision, we will make it come to life.</p>
+              <a href="#featured-services" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                Started</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url('static/img/intro-carousel/3.jpg')">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Imagine whats beyond!</h2>
+              <p class="animate__animated animate__fadeInUp">Let your imagination fly free. If its something you have
+                ever imagined, we will give it a shape</p>
+              <a href="#featured-services" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                Started</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url('static/img/intro-carousel/4.jpg')">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">It is Powerful</h2>
+              <p class="animate__animated animate__fadeInUp">Everything we do is so powerful, secure and easy to manage.
+                Give it a try and you will love it</p>
+              <a href="#featured-services" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                Started</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-item" style="background-image: url('static/img/intro-carousel/5.jpg')">
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">Ready!</h2>
+              <p class="animate__animated animate__fadeInUp">Lets</p>
+              <a href="#featured-services" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get
+                Started</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+    </div>
+  </div>
+</section><!-- End Intro Section -->
+
+<main id="main">
+
+  <!-- ======= Featured Services Section Section ======= -->
+  <section id="featured-services">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-4 box">
+          <i class="ion-ios-bookmarks-outline"></i>
+          <h4 class="title"><a href="#contact">Build a Website</a></h4>
+          <p class="description">Do you want to give a face to your dream? Share us your dream and we will give it the
+            best face</p>
+        </div>
+
+        <div class="col-lg-4 box box-bg">
+          <i class="ion-ios-stopwatch-outline"></i>
+          <h4 class="title"><a href="#contact">Use our Services</a></h4>
+          <p class="description">We have much more bespoke services that can be used based on your needs. Check it here
+          </p>
+        </div>
+
+        <div class="col-lg-4 box">
+          <i class="ion-ios-heart-outline"></i>
+          <h4 class="title"><a href="#contact">Get the latest trend</a></h4>
+          <p class="description">Want to know what users need. Try our specialised data services and see what users
+            love.</p>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Featured Services Section -->
+
+  <!-- ======= About Us Section ======= -->
+  <section id="about">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3>About Us</h3>
+        <p>We are a team of professional enthusiasts who share their time off work to solve real world problems. If its
+          out there, it needs to be solved. Money should bot be the answer to every problem in the world</p>
+      </header>
+
+      <div class="row about-cols">
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="about-col">
+            <div class="img">
+              <img src="{% static 'img/about-mission.jpg' %}" alt="" class="img-fluid">
+              <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
+            </div>
+            <h2 class="title"><a href="#">Our Mission</a></h2>
+            <p>
+              To solve real world problem using technology.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="about-col">
+            <div class="img">
+              <img src="{% static 'img/about-plan.jpg' %}" alt="" class="img-fluid">
+              <div class="icon"><i class="ion-ios-list-outline"></i></div>
+            </div>
+            <h2 class="title"><a href="#">Our Plan</a></h2>
+            <p>
+              To enable technology to help solve real world problems bit by bit.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="about-col">
+            <div class="img">
+              <img src="{% static 'img/about-vision.jpg' %}" alt="" class="img-fluid">
+              <div class="icon"><i class="ion-ios-eye-outline"></i></div>
+            </div>
+            <h2 class="title"><a href="#">Our Vision</a></h2>
+            <p>
+              We are not here to make money. We are here to make technology accessible and in the process make enough to help solve the next problem
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End About Us Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="services">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header wow fadeInUp">
+        <h3>Services</h3>
+        <p>Our services include any help required to give your dream a face.
+        </p>
+      </header>
+
+      <div class="row">
+
+        <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
+          <h4 class="title"><a href="">Data Analytics</a></h4>
+          <p class="description">Want to know more about your dataset, hit us and we will help you make sense of it</p>
+        </div>
+        <!-- <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon"><i class="ion-ios-bookmarks-outline"></i></div>
+          <h4 class="title"><a href="">Dolor Sitema</a></h4>
+          <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat tarad limino ata</p>
+        </div>
+        <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon"><i class="ion-ios-paper-outline"></i></div>
+          <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+          <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur</p>
+        </div> -->
+        <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
+          <h4 class="title"><a href="">Optimisation</a></h4>
+          <p class="description">Have something but need that extra bit to make it better, hit us with the problem and we will optimise the solution</p>
+        </div>
+        <!-- <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="300">
+          <div class="icon"><i class="ion-ios-barcode-outline"></i></div>
+          <h4 class="title"><a href="">Nemo Enim</a></h4>
+          <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+            voluptatum deleniti atque</p>
+        </div> -->
+        <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="400">
+          <div class="icon"><i class="ion-ios-people-outline"></i></div>
+          <h4 class="title"><a href="">People Trends</a></h4>
+          <p class="description">Hit us if you want to know more on the current user trends</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
+
+  <!-- ======= Call To Action Section ======= -->
+  <section id="call-to-action">
+    <div class="container text-center" data-aos="zoom-in">
+      <h3>Call To Action</h3>
+      <p> Fill the contact us form to engage us in your process.
+      </p>
+      <a class="cta-btn" href="#contact">Contact Us</a>
+    </div>
+  </section><!-- End Call To Action Section -->
+
+  <!-- ======= Skills Section ======= -->
+  <section id="skills">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3>Our Skills</h3>
+        <p>We are multi disciplined and pack variety of skills from design to code. Every one is unique in terms of
+          skills we possess</p>
+      </header>
+
+      <div class="skills-content">
+
+        <div class="progress">
+          <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100">
+            <span class="skill">HTML <i class="val">100%</i></span>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+            <span class="skill">CSS <i class="val">90%</i></span>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+            aria-valuemax="100">
+            <span class="skill">JavaScript <i class="val">75%</i></span>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+            aria-valuemax="100">
+            <span class="skill">Python <i class="val">100%</i></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Skills Section -->
+
+  <!-- ======= Facts Section ======= -->
+  <section id="facts">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3>Facts</h3>
+        <p>Following stats show what we have enabled so far using the power of technology</p>
+      </header>
+
+      <div class="row counters">
+
+        <div class="col-lg-3 col-6 text-center">
+          <span data-toggle="counter-up">2</span>
+          <p>Clients</p>
+        </div>
+
+        <div class="col-lg-3 col-6 text-center">
+          <span data-toggle="counter-up">8</span>
+          <p>Projects</p>
+        </div>
+
+        <div class="col-lg-3 col-6 text-center">
+          <span data-toggle="counter-up">100</span>
+          <p>Hours Of Support</p>
+        </div>
+
+        <div class="col-lg-3 col-6 text-center">
+          <span data-toggle="counter-up">3</span>
+          <p>Hard Workers</p>
+        </div>
+
+      </div>
+
+      <!-- <div class="facts-img">
+        <img src="{% static 'img/facts-img.png' %}" alt="" class="img-fluid">
+      </div> -->
+
+    </div>
+  </section><!-- End Facts Section -->
+
+  <!-- ======= Portfolio Section ======= -->
+  <section id="portfolio" class="section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header">
+        <h3 class="section-title">Our Portfolio</h3>
+      </header>
+
+      <div class="row" data-aos="fade-up" data-aos-delay="100"">
+      <div class=" col-lg-12">
+        <ul id="portfolio-flters">
+          <li data-filter="*" class="filter-active">All</li>
+          <li data-filter=".filter-app">App</li>
+          <li data-filter=".filter-card">Card</li>
+          <li data-filter=".filter-web">Web</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <div class="portfolio-wrap">
+          <figure>
+            <img src="assets/img/portfolio/web3.jpg" class="img-fluid" alt="">
+            <a href="assets/img/portfolio/web3.jpg" class="link-preview venobox" data-gall="portfolioGallery"
+              title="Web 3"><i class="ion ion-eye"></i></a>
+            <a href="https://myhome-stage.herokuapp.com" target="_blank" class="link-details" title="More Details"><i
+                class="ion ion-android-open"></i></a>
+          </figure>
+
+          <div class="portfolio-info">
+            <h4><a href="https://myhome-stage.herokuapp.com" target="_blank">My Home</a></h4>
+            <p>Web</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+        <div class="portfolio-wrap">
+          <figure>
+            <img src="assets/img/portfolio/web3.jpg" class="img-fluid" alt="">
+            <a href="assets/img/portfolio/web3.jpg" class="link-preview venobox" data-gall="portfolioGallery"
+              title="Web 3"><i class="ion ion-eye"></i></a>
+            <a href="https://brisbanelegends-stage.herokuapp.com" target="_blank" class="link-details" title="More Details"><i
+                class="ion ion-android-open"></i></a>
+          </figure>
+
+          <div class="portfolio-info">
+            <h4><a href="https://brisbanelegends-stage.herokuapp.com" target="_blank">Brisbane Legends</a></h4>
+            <p>Web</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <div class="portfolio-wrap">
+          <figure>
+            <img src="assets/img/portfolio/app2.jpg" class="img-fluid" alt="">
+            <a href="assets/img/portfolio/app2.jpg" class="link-preview venobox" data-gall="portfolioGallery"
+              title="App 2"><i class="ion ion-eye"></i></a>
+            <a href="portfolio-details.html" class="link-details" title="More Details"><i
+                class="ion ion-android-open"></i></a>
+          </figure>
+          <div class="portfolio-info">
+            <h4><a href="portfolio-details.html">Brisbane Legends</a></h4>
+            <p>App</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+        <div class="portfolio-wrap">
+          <figure>
+            <img src="assets/img/portfolio/card2.jpg" class="img-fluid" alt="">
+            <a href="assets/img/portfolio/card2.jpg" class="link-preview venobox" data-gall="portfolioGallery"
+              title="Card 2"><i class="ion ion-eye"></i></a>
+            <a href="portfolio-details.html" class="link-details" title="More Details"><i
+                class="ion ion-android-open"></i></a>
+          </figure>
+          <div class="portfolio-info">
+            <h4><a href="portfolio-details.html">Card 2</a></h4>
+            <p>Card</p>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+
+    </div>
+  </section><!-- End Portfolio Section -->
+
+  <!-- ======= Our Clients Section ======= -->
+  <!-- <section id="clients">
+    <div class="container" data-aos="zoom-in">
+      <header class="section-header">
+        <h3>Our Clients</h3>
+      </header>
+      <div class="owl-carousel clients-carousel">
+        <img src="{% static 'img/clients/myhome.png' %}" alt="MyHome">
+      </div>
+    </div>
+  </section> -->
+  <!-- End Our Clients Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <!-- <section id="testimonials" class="section-bg">
+    <div class="container" data-aos="fade-up">
+      <header class="section-header">
+        <h3>Testimonials</h3>
+      </header>
+      <div class="owl-carousel testimonials-carousel">
+        <div class="testimonial-item">
+          <img src="assets/img/testimonial-1.jpg" class="testimonial-img" alt="">
+          <h3>Saul Goodman</h3>
+          <h4>Ceo &amp; Founder</h4>
+          <p>
+            <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+            Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam,
+            ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+            <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+          </p>
+        </div>
+        <div class="testimonial-item">
+          <img src="assets/img/testimonial-2.jpg" class="testimonial-img" alt="">
+          <h3>Sara Wilsson</h3>
+          <h4>Designer</h4>
+          <p>
+            <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+            Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum
+            velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+            <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+          </p>
+        </div>
+        <div class="testimonial-item">
+          <img src="assets/img/testimonial-3.jpg" class="testimonial-img" alt="">
+          <h3>Jena Karlis</h3>
+          <h4>Store Owner</h4>
+          <p>
+            <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+            Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor
+            labore quem eram duis noster aute amet eram fore quis sint minim.
+            <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+          </p>
+        </div>
+        <div class="testimonial-item">
+          <img src="assets/img/testimonial-4.jpg" class="testimonial-img" alt="">
+          <h3>Matt Brandon</h3>
+          <h4>Freelancer</h4>
+          <p>
+            <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+            Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim
+            dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+            <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+          </p>
+        </div>
+        <div class="testimonial-item">
+          <img src="assets/img/testimonial-5.jpg" class="testimonial-img" alt="">
+          <h3>John Larson</h3>
+          <h4>Entrepreneur</h4>
+          <p>
+            <img src="assets/img/quote-sign-left.png" class="quote-sign-left" alt="">
+            Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore
+            duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+            <img src="assets/img/quote-sign-right.png" class="quote-sign-right" alt="">
+          </p>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- End Testimonials Section -->
+
+  <!-- ======= Team Section ======= -->
+  <section id="team">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header">
+        <h3>Team</h3>
+        <p>Our team comprises of following dynamic professionals</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Manas Mallick</h4>
+                  <span>CEO / CTO</span>
+                  <div class="social">
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="100">
+            <img src="{% static 'img/team-1.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Manas Mallick</h4>
+                <span>CEO / CTO</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="200">
+            <img src="{% static 'img/team-2.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="member" data-aos="fade-up" data-aos-delay="300">
+            <img src="{% static 'img/team-3.jpg' %}" class="img-fluid" alt="">
+            <div class="member-info">
+              <div class="member-info-content">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+                <div class="social">
+                  <a href=""><i class="fa fa-twitter"></i></a>
+                  <a href=""><i class="fa fa-facebook"></i></a>
+                  <a href=""><i class="fa fa-google-plus"></i></a>
+                  <a href=""><i class="fa fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+
+    </div>
+  </section><!-- End Team Section -->
+
+  <!-- ======= Terms Section ======= -->
+  <!-- <section id="terms">
+    <div class="container" data-aos="fade-up">
+
+      <header class="section-header wow fadeInUp">
+        <h3>Terms of Services</h3>
+        <p>Following are our terms of service.
+        </p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Morbi leo risus</li>
+          <li class="list-group-item">Porta ac consectetur ac</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </header>
+
+    </div>
+  </section> -->
+  <!-- End Terms Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h3>Contact Us</h3>
+        <p>Use the form below to send us a message so we can get it touch.</p>
+      </div>
+
+      <div class="row contact-info">
+
+        <div class="col-md-4">
+          <div class="contact-address">
+            <i class="ion-ios-location-outline"></i>
+            <h3>Address</h3>
+            <address>Brisbane 4000, QLD, Australia</address>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="contact-phone">
+            <i class="ion-ios-telephone-outline"></i>
+            <h3>Phone Number</h3>
+            <p><a href="tel:+61469841513">Click to Call</a></p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="contact-email">
+            <i class="ion-ios-email-outline"></i>
+            <h3>Email</h3>
+            <p><a href="mailto:manasm.dev@gmail.com">manasm.dev@gmail.com</a></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form">
+        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
+                data-msg="Please enter at least 4 chars" />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email"
+                data-rule="email" data-msg="Please enter a valid email" />
+              <div class="validate"></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+              data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+            <div class="validate"></div>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="message" rows="5" data-rule="required"
+              data-msg="Please write something for us" placeholder="Message"></textarea>
+            <div class="validate"></div>
+          </div>
+          <div class="mb-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div>
+          <div class="text-center"><button type="submit">Send Message</button></div>
+        </form>
+      </div>
+
+    </div>
+  </section><!-- End Contact Section -->
+
+</main><!-- End #main -->
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+<!-- Uncomment below i you want to use a preloader -->
+<!-- <div id="preloader"></div> -->
+{% endblock %}

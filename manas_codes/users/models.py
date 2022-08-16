@@ -1,5 +1,4 @@
 from typing import Optional
-from typing_extensions import Required
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import CharField

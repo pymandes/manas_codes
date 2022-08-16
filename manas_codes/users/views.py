@@ -1,9 +1,14 @@
+import email
+from email import message
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
+from django.shortcuts import render, redirect
+from .forms import ContactForm
+from django.http import HttpResponseRedirect
 
 User = get_user_model()
 
@@ -46,3 +51,29 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+def HomepageView(request):
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('Saving message')
+            message = 'Message sent!!'
+            return render(request, "pages/index.html", {'form': form, 'message': message})
+
+    form = ContactForm()
+    return render(request, "pages/index.html", {'form': form})
+
+
+def contact(request):
+
+    print('contact')
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print('Saving message')
+            message = 'Message sent!!'
+            return HttpResponseRedirect('index', {'message': message})

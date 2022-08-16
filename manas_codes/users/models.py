@@ -1,4 +1,7 @@
+from typing import Optional
+from typing_extensions import Required
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 from django.db.models import CharField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -24,3 +27,14 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+
+class ContactModel(models.Model):
+    name = models.CharField(max_length = 50)
+    email = models.EmailField(max_length = 150)
+    subject = models.CharField(max_length = 200)
+    message = models.CharField(max_length = 2000)
+    created = models.DateTimeField(auto_now=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.email

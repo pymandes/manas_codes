@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from manas_codes.users.forms import UserAdminChangeForm, UserAdminCreationForm
+from manas_codes.users.models import ContactModel
 
 User = get_user_model()
 
@@ -32,3 +33,10 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = ["username", "name", "is_superuser"]
     search_fields = ["name"]
+
+
+@admin.register(ContactModel)
+class ContactAdmin(admin.ModelAdmin):
+
+    list_display = ["name", "email", "subject", "message"]
+    search_fields = ["name", "email", "subject", "message"]

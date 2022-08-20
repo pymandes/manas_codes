@@ -9,7 +9,7 @@ from manas_codes.users.models import ContactModel
 
 User = get_user_model()
 AdminSite.site_header = 'ManasCodes Administration'
-AdminSite.site_header = 'ManasCodes Admin'
+AdminSite.site_title = 'ManasCodes Admin'
 
 
 @admin.register(User)

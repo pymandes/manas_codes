@@ -18,5 +18,5 @@ class CategoryAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
 
     list_display = ["name", "type", "amount", "paid_for", "paid_by", "paid_to", "date", "category"]
-    search_fields = ["name", "type", "amount", "paid_for", "paid_by", "paid_to", "category"]
+    search_fields = ["name", "type", "amount", "paid_for", "paid_by", "paid_to", "category__name"]
 

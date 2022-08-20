@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
@@ -7,6 +8,8 @@ from manas_codes.users.forms import UserAdminChangeForm, UserAdminCreationForm
 from manas_codes.users.models import ContactModel
 
 User = get_user_model()
+AdminSite.site_header = 'ManasCodes Administration'
+AdminSite.site_header = 'ManasCodes Admin'
 
 
 @admin.register(User)

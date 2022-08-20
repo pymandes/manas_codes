@@ -4,11 +4,18 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from manas_codes.users.forms import UserAdminChangeForm, UserAdminCreationForm
-from myexpenses.models import Transaction, Category
+from myexpenses.models import Transaction, Category, Group
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+
+    list_display = ["name", "comments", "created"]
+    search_fields = ["name", "comments"]
+
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
 
     list_display = ["name", "comments", "created"]
     search_fields = ["name", "comments"]

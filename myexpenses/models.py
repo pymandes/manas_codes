@@ -11,12 +11,25 @@ class Category(models.Model):
         return self.name
 
 
+class Group(models.Model):
+    name = models.CharField(max_length = 50, default="Hyderabad Home")
+    comments = models.CharField(max_length = 2000)
+    created = models.DateTimeField(auto_now=True, blank=True)
+    updated = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class Transaction(models.Model):
 
     TRANSACTION_CHOICES = [
         ('expense', 'Expense'),
         ('income', 'Income')
     ]
+
+    def get_default_group():
+        return Group.objects.get_or_create(name="Hyderabad Home")[0].id
 
     name = models.CharField(max_length = 50)
     type = models.CharField(choices=TRANSACTION_CHOICES, default='expense', max_length=10)
@@ -25,6 +38,7 @@ class Transaction(models.Model):
     paid_by = models.CharField(max_length=20)
     paid_to = models.CharField(max_length=20)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    group = models.ForeignKey(Group, on_delete=models.PROTECT, blank=True, default=get_default_group)
     comments = models.CharField(max_length = 2000)
     date = models.DateField(blank=False)
     created = models.DateTimeField(auto_now=True, blank=True)

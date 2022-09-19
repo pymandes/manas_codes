@@ -8,6 +8,7 @@ from myfinance.models import Transaction, Category
 from myfinance.forms import CategoryForm
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from django_htmx.middleware import HtmxDetails
 from django.core.paginator import Paginator
@@ -33,6 +34,7 @@ class TransactionCreateView(CreateView):
 
 
 @require_GET
+@login_required
 def category(request: HtmxHttpRequest) -> HttpResponse:
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=Category.objects.all(), per_page=10).get_page(page_num)
@@ -49,6 +51,7 @@ def category(request: HtmxHttpRequest) -> HttpResponse:
         "page": page})
 
 @require_POST
+@login_required
 def add_category(request: HtmxHttpRequest) -> HttpResponse:
     form = CategoryForm(request.POST)
     if form.is_valid():
@@ -94,6 +97,7 @@ def add_category(request: HtmxHttpRequest) -> HttpResponse:
 
 
 @require_GET
+@login_required
 def transactions(request: HtmxHttpRequest) -> HttpResponse:
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=Transaction.objects.all(), per_page=10).get_page(page_num)
@@ -111,6 +115,7 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
 
 
 @require_GET
+@login_required
 def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
     name = request.GET.get("name")
     page_num = request.GET.get("page", "1")
@@ -130,6 +135,7 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
 
 
 @require_GET
+@login_required
 def category_view(request: HtmxHttpRequest) -> HttpResponse:
     # Standard Django pagination
     page_num = request.GET.get("page", "1")
@@ -155,6 +161,7 @@ def category_view(request: HtmxHttpRequest) -> HttpResponse:
     )
 
 
+@login_required
 def delete_category(request, pk):
     # remove the contact from list.
     category_id = Category.objects.get(id=pk)
@@ -165,6 +172,7 @@ def delete_category(request, pk):
 
 
 @require_GET
+@login_required
 def transaction_view(request: HtmxHttpRequest) -> HttpResponse:
     # Standard Django pagination
     page_num = request.GET.get("page", "1")

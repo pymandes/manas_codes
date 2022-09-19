@@ -1,0 +1,79 @@
+{% extends "myfinance_base.html" %}
+{% block content %} 
+<!-- <h2>Transactions</h2> -->
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Transactions</h1>
+  <!-- <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group mr-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+      <span data-feather="calendar"></span>
+      This week
+    </button>
+  </div> -->
+</div>
+<div class="card border-light mb-3">
+  <div class="card-body">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h5 class="h5">
+        List all Transactions 
+        <div class="btn-group" role="group" aria-label="Third group">
+        <button type="button" class="btn btn-info disabled">{{ object_list.count }}</button>
+      </div> </h5>
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+          <a class="btn btn-primary" href="{% url 'myfinance:create-transaction' %}" >Add Transaction</a>
+        </div>
+        <div class="btn-group me-2" role="group" aria-label="Second group">
+          <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+        </div>
+      </div>
+    </div>
+    
+    <p class="card-text">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Category</th>
+              <th scope="col">Group</th>
+              <th scope="col">Amount</th>
+              <th scope="col">From</th>
+              <th scope="col">To</th>
+              <th scope="col">For</th>
+              <th scope="col">Comments</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for transaction in object_list %}
+              <tr>
+                <th scope="row"><a href="{% url 'myfinance:transaction-detail' transaction.id %}">{{ forloop.counter }}</a></th>
+                <td>{{ transaction.date|date:"d M Y" }}</td>
+                <td>{{ transaction.name }}</td>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.category }}</td>
+                <td>{{ transaction.group }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.paid_by }}</td>
+                <td>{{ transaction.paid_to }}</td>
+                <td>{{ transaction.paid_for }}</td>
+                <td>{{ transaction.comments }}</td>
+                <td><a class="btn btn-danger btn-sm" href="" role="button">Delete</a></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

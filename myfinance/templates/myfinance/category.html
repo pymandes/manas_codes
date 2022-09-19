@@ -1,0 +1,23 @@
+{% extends "myfinance_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+<div class="align-center col-10 offset-1">
+    <div class="d-flex justify-content-between align-items-center">
+        <p class="lead ml-0">My Categories</p>
+        <form hx-post="{% url 'myfinance:create-category' %}" hx-target='#categories' class="d-flex align-items-center" method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" class="form-control-sm mr-2" placeholder="Name" hx-post="/check-name/" hx-trigger="keyup" hx-target="#name-exist"/>
+
+            <input type="text" name="comments" class="form-control-sm mr-2" placeholder="Comments" />
+            
+            <button hx-post='{% url "myfinance:create-category"%}' hx-target='#categories' type="submit" class="btn btn-success btn-sm">Save</button>
+        </form>
+    </div>
+    <hr/>
+    
+    <div id="categories">
+        {% include 'myfinance/category_list.html' %}
+    </div>
+</div>
+{% endblock %}

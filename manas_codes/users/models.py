@@ -33,7 +33,7 @@ class ContactModel(models.Model):
     email = models.EmailField(max_length = 150)
     subject = models.CharField(max_length = 200)
     message = models.CharField(max_length = 2000)
-    created = models.DateTimeField(auto_now=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self) -> str:
         return self.email

@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}MyExpenses{% endblock title %}</title>
+    <title>{% block title %}MyFinance{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MyExpenses Main Project">
+    <meta name="description" content="MyFinance Main Project">
     <meta name="author" content="Manas Mallick">
 
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
@@ -18,6 +18,7 @@
 
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
     <!-- Your stuff: Third-party CSS libraries go here -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- This file stores project-specific CSS -->
 
@@ -32,10 +33,12 @@
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
       <!--<script defer src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
       <!-- Your stuff: Third-party javascript libraries go here -->
-
+      <script src="{% static 'js/htmx.min.js' %}" defer></script>
+      
       <!-- place project specific Javascript in this file -->
 
       <script defer src="{% static 'js/project.js' %}"></script>
+
      
 
     {% endblock javascript %}
@@ -50,18 +53,21 @@
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="{% url 'myexpenses:home' %}">
+          <a class="navbar-brand" href="{% url 'myfinance:home' %}">
             <img src="/static/images/EGS-Logo.png" alt="" width="50" class="d-inline-block align-text-center">
-            MyExpenses
+            MyFinance
           </a>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'myexpenses:home' %}">Home <span class="visually-hidden">(current)</span></a>
+                <a class="nav-link" href="{% url 'myfinance:home' %}">Home <span class="visually-hidden">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}" >About</a>
+                <a class="nav-link" href="{% url 'myfinance:transactions' %}" >Transactions</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'myfinance:categories' %}" >Categories</a>
               </li>
               </ul>
               <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
@@ -104,9 +110,10 @@
         {% endfor %}
       {% endif %}
 
-      {% block content %}
+      <main id="main">
         
-      {% endblock content %}
+        {% block main %}{% endblock %}
+      </main>
 
     </div> <!-- /container -->
 
@@ -118,6 +125,9 @@
     with a "defer" so that you run inline code:
     <script>
       window.addEventListener('DOMContentLoaded', () => {/* Run whatever you want */});
+      document.body.addEventListener('htmx:configRequest', (event) => {
+          event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}'; //insert csrf token when performing AJAX request 
+      })
     </script>
     {% endcomment %}
     {% endblock inline_javascript %}

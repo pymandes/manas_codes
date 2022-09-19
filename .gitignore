@@ -279,3 +279,4 @@ Presento/
 *-venv/
 *.db
 .envs/
+fixtures/

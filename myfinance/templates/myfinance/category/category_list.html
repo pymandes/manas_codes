@@ -1,0 +1,73 @@
+<div id="categories" class="card mb-3 text-bg-light border border-0">
+    <div class="card-body">
+      <h5 class="card-title">List of Categories</h5>
+      {% if page.object_list %}
+<p class="card-text">
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Comments</th>
+            <th scope="col">Created</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for transaction in page.object_list %}
+            <tr>
+            <td>{{ transaction.name }}</td>
+            <td>{{ transaction.comments }}</td>
+            <td>{{ transaction.created }}</td>
+            <td><a class="btn btn-danger btn-sm" href="{% url 'myfinance:delete-category' transaction.id %}" role="button">X</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</p>
+    </div>
+    <section>
+        <!--
+          The htmx attributes set on the nav here are inherited by the child links.
+          hx-target tells where htmx to swap the fetched content in, and hx-swap
+          tells it how to swap it - by replacing the 'outerHTML' attribute of the
+          target, i.e. replacing the target's actual DOM node. hx-push-url tells
+          htmx to push the fetched URL into the browser history, so we can use
+          the backwards/forwards buttons to navigate these subpages.
+        -->
+        <nav hx-target="#categories" hx-swap="outerHTML" hx-push-url="true">
+            <div class="btn-group me-2" role="group" aria-label="Second group">
+                {% if page.number != 1 %}
+                <a hx-get="?page=1" href="?page=1" class="btn btn-sm btn-outline-secondary">&laquo; First</a>
+                        <!--
+                        For each link we use hx-get to tell htmx to fetch that URL and
+                        swap it in. We also repeat the URL in the href attribute so the
+                        page works without JavaScript, and to ensure the link is
+                        displayed as clickable.
+                        -->
+                {% endif %}
+                {% if page.has_previous %}
+                <a hx-get="?page={{ page.previous_page_number }}" href="?page={{ page.previous_page_number }}" class="btn btn-sm btn-outline-secondary">{{ page.previous_page_number }}</a>
+                {% endif %}
+                <a hx-get="?page={{ page.number }}" href="?page={{ page.number }}" class="btn btn-sm btn-outline-secondary">{{ page.number }}</a>
+                {% if page.has_next %}
+                <a hx-get="?page={{ page.next_page_number }}" href="?page={{ page.next_page_number }}" class="btn btn-sm btn-outline-secondary">{{ page.next_page_number }}</a>
+                {% endif %}
+                {% if page.number != page.paginator.num_pages %}
+                <a hx-get="?page={{ page.paginator.num_pages }}" href="?page={{ page.paginator.num_pages }}" class="btn btn-sm btn-outline-secondary">&raquo; Last</a>
+                {% endif %}
+            </div>
+        </nav>
+      </section>
+    <div class="col-sm-5">
+        {% if getmessage %}
+        <div class="alert alert-success" role="alert">
+            {{ getmessage }}
+          </div>
+        {% endif %}
+    </div>    
+</div>
+{% else %}
+<p>No Categories</p>
+{% endif %}

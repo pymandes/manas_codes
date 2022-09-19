@@ -1,0 +1,42 @@
+{% extends "myfinance_base.html" %}
+{% block content %} 
+<h2>Transactions</h2>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Category</th>
+        <th scope="col">Group</th>
+        <th scope="col">Amount</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">For</th>
+        <th scope="col">Comments</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+        <tr>
+          <th scope="row"><a href="">{{ forloop.counter }}</a></th>
+          <td>{{ object.date|date:"d M Y" }}</td>
+          <td>{{ object.name }}</td>
+          <td>{{ object.type }}</td>
+          <td>{{ object.category__name }}</td>
+          <td>{{ object.group__name }}</td>
+          <td>{{ object.amount }}</td>
+          <td>{{ object.paid_by }}</td>
+          <td>{{ object.paid_to }}</td>
+          <td>{{ object.paid_for }}</td>
+          <td>{{ object.comments }}</td>
+          <td><a class="btn btn-danger btn-sm" href="" role="button">Delete</a></td>
+        </tr>
+
+    </tbody>
+  </table>
+
+{% endblock %}

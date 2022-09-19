@@ -1,0 +1,49 @@
+
+<div class="card mb-3 border border-0">
+    <div class="card-body">
+      <h2 class="card-title">Transactions</h2>
+    </div>
+</div>
+<div class="card mb-3 text-bg-light border border-0">
+  <!-- <img src="..." class="card-img" alt="..."> -->
+  <div class="card-body">
+    <h5 class="card-title mb-3">Search Transactions</h5>
+  <form hx-get="/myfinance/search_transaction/"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        hx-target="#transactions">
+        <div class="row g-4">
+          <div class="col-sm-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="" value="">
+            <div class="invalid-feedback">
+              Valid name is required.
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" name="date" class="form-control form-control-sm" id="transactiondate" placeholder="" value="">
+            <div class="invalid-feedback">
+              Valid date is required.
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <label for="frequency" class="form-label">Frequency</label>
+            <button type="button" class="form-control btn btn-outline-secondary dropdown-toggle d-sm-block" id="frequency">
+              <!-- <span data-feather="calendar" class="align-text-bottom"></span> -->
+              <i class="bi bi-calendar4"></i>
+              This week
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          an    
+      </div>
+  </form>
+  </div>
+</div>

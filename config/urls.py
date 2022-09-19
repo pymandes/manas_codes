@@ -16,7 +16,7 @@ urlpatterns = [
     # User management
     path("users/", include("manas_codes.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    path("myexpenses/", include("myexpenses.urls", namespace="myexpenses")),
+    path("myfinance/", include("myfinance.urls", namespace="myfinance")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

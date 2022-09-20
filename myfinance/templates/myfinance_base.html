@@ -69,6 +69,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'myfinance:categories' %}" >Categories</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'myfinance:groups' %}" >Groups</a>
+              </li>
               </ul>
               <ul class="nav navbar-nav ms-auto w-100 justify-content-end">
               {% if request.user.is_authenticated %}           

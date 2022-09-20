@@ -1,14 +1,16 @@
 import imp
+from re import search
 from sre_parse import CATEGORIES
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest, HttpResponseNotFound
 from django.views.generic import ListView, DetailView, CreateView
-from myfinance.models import Transaction, Category
-from myfinance.forms import CategoryForm
+from myfinance.models import Transaction, Category, Group
+from myfinance.forms import CategoryForm, GroupForm
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
-from django.db.models import Q
+from django.db.models import Q, Sum
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchVector, SearchRank
 
 from django_htmx.middleware import HtmxDetails
 from django.core.paginator import Paginator
@@ -101,6 +103,8 @@ def add_category(request: HtmxHttpRequest) -> HttpResponse:
 def transactions(request: HtmxHttpRequest) -> HttpResponse:
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=Transaction.objects.all(), per_page=10).get_page(page_num)
+    total_amount = Transaction.objects.aggregate(Sum('amount'))['amount__sum']
+    total_transactions = Transaction.objects.count()
 
     if request.htmx:
         base_template = "myfinance_partial.html"
@@ -111,16 +115,33 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
 
     return render(request, template, {
         # "base_template": base_template, 
-        "page": page})
+        "page": page, "total": total_amount, "total_transactions": total_transactions})
 
 
 @require_GET
 @login_required
 def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
     name = request.GET.get("name")
+    after = request.GET.get("after")
+    before = request.GET.get("before")
+    frequency = request.GET.get("frequency")
     page_num = request.GET.get("page", "1")
-    queryset = Transaction.objects.filter(Q(name__icontains=name) | Q(comments__icontains=name))
+
+    if name:
+        print(name)
+    if after:
+        print(after)
+    if before:
+        print(before)
+    if frequency:
+        print(frequency)
+
+    queryset = Transaction.objects.annotate(search=SearchVector('name', 'comments', 'paid_to')).filter(search=name)
+    #  (Q(name__icontains=name) | Q(comments__icontains=name) | Q(paid_to__icontains=name))
     page = Paginator(object_list=queryset, per_page=10).get_page(page_num)
+
+    total_amount = queryset.aggregate(Sum('amount'))['amount__sum']
+    total_transactions = queryset.count()
 
     if request.htmx:
         base_template = "myfinance_partial.html"
@@ -131,7 +152,40 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
 
     return render(request, template, {
         # "base_template": base_template, 
+        "page": page, "total": total_amount, "total_transactions": total_transactions})
+
+
+@require_GET
+@login_required
+def group(request: HtmxHttpRequest) -> HttpResponse:
+    page_num = request.GET.get("page", "1")
+    page = Paginator(object_list=Group.objects.all(), per_page=10).get_page(page_num)
+
+    if request.htmx:
+        base_template = "myfinance_partial.html"
+        template = "myfinance/group/group_list.html"
+    else:
+        base_template = "myfinance_base.html"
+        template = "myfinance/group/group_home.html"
+
+    return render(request, template, {
+        # "base_template": base_template, 
         "page": page})
+
+
+@require_POST
+@login_required
+def add_group(request: HtmxHttpRequest) -> HttpResponse:
+    form = GroupForm(request.POST)
+    if form.is_valid():
+        name = form.save()
+        page_num = request.GET.get("page", "1")
+        page = Paginator(object_list=Group.objects.all(), per_page=10).get_page(page_num)
+    return render(
+        request,
+        "myfinance/group/group_list.html",
+        {"form": form, "page": page},
+    )
 
 
 @require_GET
@@ -169,6 +223,16 @@ def delete_category(request, pk):
 
     message = f'Category with id {pk} deleted'
     return redirect('myfinance:categories')
+
+
+@login_required
+def delete_group(request, pk):
+    # remove the contact from list.
+    group_id = Group.objects.get(id=pk)
+    group_id.delete()
+
+    message = f'Group with id {pk} deleted'
+    return redirect('myfinance:groups')
 
 
 @require_GET

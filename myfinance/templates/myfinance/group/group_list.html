@@ -1,61 +1,29 @@
-<div id="transactions" class="card mb-3 text-bg-light border border-0">
+<div id="groups" class="card mb-3 text-bg-light border border-0">
     <div class="card-body">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h5 class="card-title">List of Transactions
-                <div class="btn-group" role="group" aria-label="Third group">
-                    <button type="button" class="btn btn-outline-dark disabled">{{ total_transactions }}</button>
-                </div>
-            </h5>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <!-- <button type="button" class="btn btn-sm btn-light-secondary disabled">Total</button> -->
-                </div>
-                <button type="button" class="btn btn-outline-primary disabled">
-                  Total: {{ total }}
-                </button>
-              </div>
-        </div>
-      
-
+      <h5 class="card-title">List of Groups</h5>
       {% if page.object_list %}
 <p class="card-text">
     <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Comments</th>
+            <th scope="col">Created</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for group in page.object_list %}
             <tr>
-                
-                <th scope="col">Date</th>
-                <th scope="col">Name</th>
-                <th scope="col">Type</th>
-                <th scope="col">Category</th>
-                <th scope="col">Group</th>
-                <th scope="col">Amount</th>
-                <th scope="col">From</th>
-                <th scope="col">To</th>
-                <th scope="col">For</th>
-                <th scope="col">Comments</th>
-                <th scope="col">Action</th>
+            <td>{{ group.name }}</td>
+            <td>{{ group.comments }}</td>
+            <td>{{ group.created }}</td>
+            <td><a class="btn btn-danger btn-sm" href="{% url 'myfinance:delete-group' group.id %}" role="button">X</a></td>
             </tr>
-            </thead>
-            <tbody>
-                {% for transaction in page.object_list %}
-                <tr>
-                
-                <td>{{ transaction.date|date:"d M Y" }}</td>
-                <td>{{ transaction.name }}</td>
-                <td>{{ transaction.type }}</td>
-                <td>{{ transaction.category }}</td>
-                <td>{{ transaction.group }}</td>
-                <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.paid_by }}</td>
-                <td>{{ transaction.paid_to }}</td>
-                <td>{{ transaction.paid_for }}</td>
-                <td>{{ transaction.comments }}</td>
-                <td><a class="btn btn-danger btn-sm" href="" role="button">Delete</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            {% endfor %}
+        </tbody>
+    </table>
     </div>
 </p>
     </div>
@@ -68,7 +36,7 @@
           htmx to push the fetched URL into the browser history, so we can use
           the backwards/forwards buttons to navigate these subpages.
         -->
-        <nav hx-target="#transactions" hx-swap="outerHTML" hx-push-url="true">
+        <nav hx-target="#groups" hx-swap="outerHTML" hx-push-url="true">
             <div class="btn-group me-2" role="group" aria-label="Second group">
                 {% if page.number != 1 %}
                 <a hx-get="?page=1" href="?page=1" class="btn btn-sm btn-outline-secondary">&laquo; First</a>
@@ -101,5 +69,5 @@
     </div>    
 </div>
 {% else %}
-<p>No Categories</p>
+<p>No Groups</p>
 {% endif %}

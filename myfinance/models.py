@@ -11,6 +11,9 @@ class Category(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
 
 class Group(models.Model):
     name = models.CharField(max_length = 50, default="Hyderabad Home")

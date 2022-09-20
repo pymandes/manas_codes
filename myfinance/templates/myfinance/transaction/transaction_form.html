@@ -20,30 +20,45 @@
             </div>
           </div>
           <div class="col-sm-2">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" name="date" class="form-control form-control-sm" id="transactiondate" placeholder="" value="">
+            <label for="after" class="form-label">After</label>
+            <input type="date" name="after" class="form-control form-control-sm" id="transactiondateafter" placeholder="" value="">
+            <div class="invalid-feedback">
+              Valid date is required.
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <label for="before" class="form-label">Before</label>
+            <input type="date" name="before" class="form-control form-control-sm" id="transactiondatebefore" placeholder="" value="">
             <div class="invalid-feedback">
               Valid date is required.
             </div>
           </div>
           <div class="col-sm-2">
             <label for="frequency" class="form-label">Frequency</label>
-            <button type="button" class="form-control btn btn-outline-secondary dropdown-toggle d-sm-block" id="frequency">
-              <!-- <span data-feather="calendar" class="align-text-bottom"></span> -->
-              <i class="bi bi-calendar4"></i>
-              This week
-            </button>
-          </div>
-          <div class="col-sm-2">
-            <select class="form-select" aria-label="Default select example">
-              <option selected>Open this select menu</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+            <select class="form-select form-select mb-3" aria-label=".form-select example" id="frequency" name="frequency">
+              <option value=0 selected>--None--</option>
+              <option value=1>Today</option>
+              <option value=2>This Week</option>
+              <option value=3>This Month</option>
+              <option value=4>This Year</option>
             </select>
           </div>
-          an    
-      </div>
+          <!-- <div class="col-sm-2">
+            <label for="frequency" class="form-label">Frequency</label>
+            <button type="button" class="form-control btn btn-outline-secondary dropdown-toggle d-sm-block" id="frequency"> -->
+              <!-- <span data-feather="calendar" class="align-text-bottom"></span> -->
+              <!-- <i class="bi bi-calendar4"></i>
+              This week
+            </button>
+          </div> -->
+        </div>
+        <div class="row g-4 pt-4">
+          <div class="col-sm-2">
+            <button type="submit" class="form-control btn btn-primary">
+              Search
+            </button>
+          </div>
+        </div>
   </form>
   </div>
 </div>

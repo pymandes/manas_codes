@@ -1,0 +1,67 @@
+
+
+{% extends "myfinance_base.html" %}
+{% load crispy_forms_tags %}
+{% block main %}
+
+<header>
+    <div class="row">
+        <div class="col-md-auto">
+          <span>
+              <h1 class="display-4 text-gradient text-primary">Add Transaction</h1>
+          </span>
+        </div>
+      </div>
+    <div class="page-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 d-flex justify-content-center flex-column">
+            <div class="card d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+              <!-- <div class="text-center">
+                 <h3 class="text-gradient text-primary">Add Transaction</h3>
+              </div> -->
+              <form hx-post="/myfinance/add_transaction/"
+                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                >
+                {{ form|crispy }}
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <!-- <div class="card-body pb-2">
+                    <div class="form-group mb-0 mt-md-0 mt-4 mb-4">
+                        <label>Name</label>
+                        <input class="form-control" placeholder="Name of Transaction" aria-label="Full Name" type="text">
+                    </div>
+                    <div class="form-group mb-0 mt-md-0 mt-4 mb-4">
+                        <label for="expense_type">Type</label>
+                        <select class="form-control" id="expense_type" name="expense__type">
+                        </select>
+                    </div>
+                    <div class="form-group mb-0 mt-md-0 mt-4">
+                        <label>Email</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="hello@creative-tim.com">
+                        </div>
+                    </div>
+                    <div class="form-group mb-0 mt-md-0 mt-4">
+                        <label>How can we help you?</label>
+                        <textarea name="message" class="form-control" id="message" rows="6" placeholder="Describe your problem in at least 250 characters"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                        <button type="submit" class="btn bg-gradient-primary mt-3 mb-0">Send Message</button>
+                        </div>
+                    </div>
+                </div> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+{% endblock %}

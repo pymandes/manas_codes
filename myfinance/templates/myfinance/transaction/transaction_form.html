@@ -1,13 +1,7 @@
-
-<div class="card mb-3 border border-0">
-    <div class="card-body">
-      <h2 class="card-title">Transactions</h2>
-    </div>
-</div>
 <div class="card mb-3 text-bg-light border border-0">
   <!-- <img src="..." class="card-img" alt="..."> -->
   <div class="card-body">
-    <h5 class="card-title mb-3">Search Transactions</h5>
+    <h4 class="card-title mb-3 h5">Search Transactions</h4>
   <form hx-get="/myfinance/search_transaction/"
         hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
         hx-target="#transactions">

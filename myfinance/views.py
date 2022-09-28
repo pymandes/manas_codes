@@ -1,12 +1,12 @@
 import imp
-from re import search
+from re import search, template
 from sre_parse import CATEGORIES
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest, HttpResponseNotFound
 from django.views.generic import ListView, DetailView, CreateView
 from myfinance.models import Transaction, Category, Group
-from myfinance.forms import CategoryForm, GroupForm
+from myfinance.forms import CategoryForm, GroupForm, TransactionForm
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.db.models import Q, Sum
 from django.contrib.auth.decorators import login_required
@@ -155,9 +155,32 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
         "page": page, "total": total_amount, "total_transactions": total_transactions})
 
 
+@require_http_methods(["GET", "POST"])
+@login_required
+def add_transaction(request: HtmxHttpRequest) -> HttpResponse:
+    form = TransactionForm(request.POST)
+    template = "myfinance/transaction/transaction_add.html"
+
+    if request.method == 'GET':
+        print('Get Request')
+
+    else:
+
+        print('Adding Transaction')
+
+        if form.is_valid():
+            name = form.save()
+
+        return  redirect('myfinance:transactions')
+    return render(request, template, {"form": form})
+
+
 @require_GET
 @login_required
 def group(request: HtmxHttpRequest) -> HttpResponse:
+
+    print('Getting groups')
+
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=Group.objects.all(), per_page=10).get_page(page_num)
 
@@ -177,6 +200,9 @@ def group(request: HtmxHttpRequest) -> HttpResponse:
 @login_required
 def add_group(request: HtmxHttpRequest) -> HttpResponse:
     form = GroupForm(request.POST)
+
+    print('Adding group')
+
     if form.is_valid():
         name = form.save()
         page_num = request.GET.get("page", "1")

@@ -3,7 +3,7 @@ from tokenize import group
 from django.urls import path
 
 from django.views.generic import TemplateView
-from myfinance.views import TransactionView, TransactionDetailView, TransactionCreateView, delete_group, search_transaction, add_category, delete_category, transactions, transaction_view, category, group, delete_group, add_group
+from myfinance.views import TransactionView, TransactionDetailView, TransactionCreateView, add_transaction, delete_group, search_transaction, add_category, delete_category, transactions, transaction_view, category, group, delete_group, add_group
 
 app_name = "myfinance"
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     path(r'^/(?P<pk>[0-9]+)/$', TransactionDetailView.as_view(), name="transaction-detail"),
     path("create_transaction/", TransactionCreateView.as_view(), name="create-transaction"),
     path("search_transaction/", search_transaction, name="search-transaction"),
+    path('add_transaction/', add_transaction, name='add-transaction'),
     path('add_category/', add_category, name='add-category'),
     path('add_group/', add_group, name='add-group'),
     path('delete_category/<int:pk>/', delete_category, name='delete-category'),

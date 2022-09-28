@@ -1,5 +1,12 @@
-from myfinance.models import Category, Group
+from myfinance.models import Category, Group, Transaction
 from django import forms
+
+
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        #fields = []
+        exclude = ['created', 'updated']
+        model = Transaction
 
 
 class CategoryForm(forms.ModelForm):

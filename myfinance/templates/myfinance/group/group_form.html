@@ -1,9 +1,5 @@
 {% load crispy_forms_tags %}
-<div class="card mb-3 border border-0">
-    <div class="card-body">
-      <h2 class="card-title">Groups</h2>
-    </div>
-</div>
+<h1 class="display-4">Groups</h1>
 <div class="card mb-3 text-bg-light border border-0">
     <div class="col-md-7 col-lg-8 card-body">
       <h5 class="card-title mb-3">Add Group</h5>
@@ -26,9 +22,6 @@
                 Valid comments is required.
               </div>
             </div>
-            <div class="col-sm-3 d-flex align-items-end">
-                <button class="btn btn-outline-primary" type="submit">Add Group</button>
-            </div>  
             <div class="col-sm-5">
                 {% if message %}
                 <div class="alert alert-success" role="alert">
@@ -36,6 +29,14 @@
                   </div>
                 {% endif %}
             </div>     
+        </div>
+        <div class="row g-4 pt-4">
+          <div class="col-sm-3">
+            <button class="btn btn-icon btn-3 btn-primary" type="submit" name="button-add" id="buttonn-add">
+              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+              <span class="btn-inner--text">Add Group</span>
+            </button>
+          </div>
         </div>
     </form>
   </section>

@@ -1,58 +1,44 @@
+{% load crispy_forms_tags %}
 <div class="card mb-3 text-bg-light border border-0">
   <!-- <img src="..." class="card-img" alt="..."> -->
   <div class="card-body">
     <h4 class="card-title mb-3 h5">Search Transactions</h4>
-  <form hx-get="/myfinance/search_transaction/"
-        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-        hx-target="#transactions">
-        <div class="row g-4">
-          <div class="col-sm-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" id="name" placeholder="" value="">
-            <div class="invalid-feedback">
-              Valid name is required.
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <label for="after" class="form-label">After</label>
-            <input type="date" name="after" class="form-control form-control-sm" id="transactiondateafter" placeholder="" value="">
-            <div class="invalid-feedback">
-              Valid date is required.
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <label for="before" class="form-label">Before</label>
-            <input type="date" name="before" class="form-control form-control-sm" id="transactiondatebefore" placeholder="" value="">
-            <div class="invalid-feedback">
-              Valid date is required.
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <label for="frequency" class="form-label">Frequency</label>
-            <select class="form-select form-select mb-3" aria-label=".form-select example" id="frequency" name="frequency">
-              <option value=0 selected>--None--</option>
-              <option value=1>Today</option>
-              <option value=2>This Week</option>
-              <option value=3>This Month</option>
-              <option value=4>This Year</option>
-            </select>
-          </div>
-          <!-- <div class="col-sm-2">
-            <label for="frequency" class="form-label">Frequency</label>
-            <button type="button" class="form-control btn btn-outline-secondary dropdown-toggle d-sm-block" id="frequency"> -->
-              <!-- <span data-feather="calendar" class="align-text-bottom"></span> -->
-              <!-- <i class="bi bi-calendar4"></i>
-              This week
-            </button>
-          </div> -->
+    <form hx-get="/myfinance/transactions/" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#transactions">
+      <div class="row g-4">
+        <div class="col-sm-3">
+          <label for="{{ transactions.form.name.id_for_label }}" class="form-label">Name</label>
+          {{ transactions.form.name }}
+          <div class="invalid-feedback">Valid name is required.</div>
         </div>
-        <div class="row g-4 pt-4">
+        <div class="col-sm-3">
+          <label for="{{ transactions.form.group.id_for_label }}" class="form-label">Group</label>
+          {{ transactions.form.group }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ transactions.form.category.id_for_label }}" class="form-label">Category</label>
+          {{ transactions.form.category }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ transactions.form.comments.id_for_label }}" class="form-label">Comments</label>
+          {{ transactions.form.comments }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="row g-4">
+          <!-- <div class="col-sm-3">
+          <label for="{{ transactions.form.date.id_for_label }}" class="form-label">Date</label>
+          {{ transactions.form.date }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div> -->
           <div class="col-sm-2">
             <button type="submit" class="form-control btn btn-primary">
               Search
             </button>
           </div>
         </div>
-  </form>
+    </form>
+
   </div>
+</div>
 </div>

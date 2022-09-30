@@ -3,26 +3,105 @@
 {% extends "myfinance_base.html" %}
 {% load crispy_forms_tags %}
 {% block main %}
-
 <header>
-    <div class="row">
-        <div class="col-md-auto">
-          <span>
-              <h1 class="display-4 text-gradient text-primary">Add Transaction</h1>
-          </span>
+  <div class="row pb-4">
+      <div class="col-md-auto">
+        <span>
+            <h1 class="display-4 text-gradient text-primary">Add Transaction</h1>
+        </span>
+      </div>
+  </div>
+</header>
+<div class="card mb-3 text-bg-white border border-0 ">
+  <!-- <img src="..." class="card-img" alt="..."> -->
+  <div class="card-body">
+    <h4 class="card-title mb-3 h5">Add Transaction</h4>
+    <form method="post">
+      {% csrf_token %}
+      <div class="row g-4">
+        <div class="col-sm-3">
+          <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+          {{ form.name }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ form.amount.id_for_label }}" class="form-label">Amount</label>
+          {{ form.amount }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ form.comments.id_for_label }}" class="form-label">Comments</label>
+          {{ form.comments }}
+          <div class="invalid-feedback">Valid name is required.</div>
         </div>
       </div>
-    <div class="page-header">
+      <div class="row g-4">
+        <div class="col-sm-3">
+          <label for="{{ form.group.id_for_label }}" class="form-label">Group</label>
+          {{ form.group }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ form.category.id_for_label }}" class="form-label">Category</label>
+          {{ form.category }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ form.type.id_for_label }}" class="form-label">Type</label>
+          {{ form.type }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-3">
+          <label for="{{ form.paid_for.id_for_label }}" class="form-label">Paid For</label>
+          {{ form.paid_for }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ form.paid_by.id_for_label }}" class="form-label">Paid By</label>
+          {{ form.paid_by }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+        <div class="col-sm-3">
+          <label for="{{ form.paid_to.id_for_label }}" class="form-label">Paid To</label>
+          {{ form.paid_to }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-3">
+          <label for="{{ form.date.id_for_label }}" class="form-label">Transaction Date</label>
+          {{ form.date }}
+          <div class="invalid-feedback">Valid name is required.</div>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-sm-2 pt-4">
+          <button type="submit" class="form-control btn btn-primary">
+            Add
+          </button>
+        </div>
+      </div>
+      <!-- {% csrf_token %}
+      {{ form|crispy }}
+
+      <div class="control-group">
+          <div class="controls">
+              <button type="submit" class="btn btn-primary">Add</button>
+          </div>
+      </div> -->
+    </form>
+  </div>
+</div>
+    <!-- <div class="page-header">
       <div class="container">
         <div class="row">
           <div class="col-lg-7 d-flex justify-content-center flex-column">
             <div class="card d-flex blur justify-content-center p-4 shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
-              <!-- <div class="text-center">
-                 <h3 class="text-gradient text-primary">Add Transaction</h3>
-              </div> -->
-              <form hx-post="/myfinance/add_transaction/"
-                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                >
+              <form method="post">
+
+                {% csrf_token %}
                 {{ form|crispy }}
 
                 <div class="control-group">
@@ -30,38 +109,11 @@
                         <button type="submit" class="btn btn-primary">Add</button>
                     </div>
                 </div>
-                <!-- <div class="card-body pb-2">
-                    <div class="form-group mb-0 mt-md-0 mt-4 mb-4">
-                        <label>Name</label>
-                        <input class="form-control" placeholder="Name of Transaction" aria-label="Full Name" type="text">
-                    </div>
-                    <div class="form-group mb-0 mt-md-0 mt-4 mb-4">
-                        <label for="expense_type">Type</label>
-                        <select class="form-control" id="expense_type" name="expense__type">
-                        </select>
-                    </div>
-                    <div class="form-group mb-0 mt-md-0 mt-4">
-                        <label>Email</label>
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="hello@creative-tim.com">
-                        </div>
-                    </div>
-                    <div class="form-group mb-0 mt-md-0 mt-4">
-                        <label>How can we help you?</label>
-                        <textarea name="message" class="form-control" id="message" rows="6" placeholder="Describe your problem in at least 250 characters"></textarea>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                        <button type="submit" class="btn bg-gradient-primary mt-3 mb-0">Send Message</button>
-                        </div>
-                    </div>
-                </div> -->
               </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
+    </div> -->
 
 {% endblock %}

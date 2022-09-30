@@ -12,6 +12,8 @@ from django.db.models import Q, Sum
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector, SearchRank
 
+from .filter import TransactionFilter
+
 from django_htmx.middleware import HtmxDetails
 from django.core.paginator import Paginator
 
@@ -101,21 +103,49 @@ def add_category(request: HtmxHttpRequest) -> HttpResponse:
 @require_GET
 @login_required
 def transactions(request: HtmxHttpRequest) -> HttpResponse:
+
+    transactions = TransactionFilter(request.GET, queryset=Transaction.objects.all())
     page_num = request.GET.get("page", "1")
-    page = Paginator(object_list=Transaction.objects.all(), per_page=10).get_page(page_num)
-    total_amount = Transaction.objects.aggregate(Sum('amount'))['amount__sum']
-    total_transactions = Transaction.objects.count()
+    page = Paginator(object_list=transactions.qs, per_page=10).get_page(page_num)
+    # total_amount = Transaction.objects.aggregate(Sum('amount'))['amount__sum']
+    # total_transactions = Transaction.objects.count()
+
+    # if request.htmx:
+    #     base_template = "myfinance_partial.html"
+    #     template = "myfinance/transaction/transaction_list.html"
+    # else:
+    #     base_template = "myfinance_base.html"
+    #     template = "myfinance/transaction/transaction_home.html"
+
+    # return render(request, template, {
+    #     # "base_template": base_template, 
+    #     "page": page, "total": total_amount, "total_transactions": total_transactions})
+
+    
+
+    # queryset = Transaction.objects.annotate(search=SearchVector('name', 'comments', 'paid_to')).filter(search=name)
+    #  (Q(name__icontains=name) | Q(comments__icontains=name) | Q(paid_to__icontains=name))
+    # page = Paginator(object_list=transactions.qs, per_page=10).get_page(page_num)
+
+    total_amount = transactions.qs.aggregate(Sum('amount'))['amount__sum']
+    total_transactions = transactions.qs.count()
+
+    print(f'Total: {total_amount}, transactions: {total_transactions}')
 
     if request.htmx:
+        print("HTMX request")
         base_template = "myfinance_partial.html"
         template = "myfinance/transaction/transaction_list.html"
     else:
+        print("Normal request")
         base_template = "myfinance_base.html"
         template = "myfinance/transaction/transaction_home.html"
 
+    # template = "myfinance/transaction_list.html"
+
     return render(request, template, {
-        # "base_template": base_template, 
-        "page": page, "total": total_amount, "total_transactions": total_transactions})
+        "base_template": base_template, 
+         "total": total_amount, "total_transactions": total_transactions, "page": page, "transactions": transactions})
 
 
 @require_GET
@@ -136,12 +166,16 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
     if frequency:
         print(frequency)
 
-    queryset = Transaction.objects.annotate(search=SearchVector('name', 'comments', 'paid_to')).filter(search=name)
-    #  (Q(name__icontains=name) | Q(comments__icontains=name) | Q(paid_to__icontains=name))
-    page = Paginator(object_list=queryset, per_page=10).get_page(page_num)
+    transactions = TransactionFilter(request.GET, queryset=Transaction.objects.all())
 
-    total_amount = queryset.aggregate(Sum('amount'))['amount__sum']
-    total_transactions = queryset.count()
+    # queryset = Transaction.objects.annotate(search=SearchVector('name', 'comments', 'paid_to')).filter(search=name)
+    #  (Q(name__icontains=name) | Q(comments__icontains=name) | Q(paid_to__icontains=name))
+    page = Paginator(object_list=transactions.qs, per_page=10).get_page(page_num)
+
+    total_amount = transactions.qs.aggregate(Sum('amount'))['amount__sum']
+    total_transactions = transactions.qs.count()
+
+    print(f'Total: {total_amount}, transactions: {total_transactions}')
 
     if request.htmx:
         base_template = "myfinance_partial.html"
@@ -150,9 +184,11 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
         base_template = "myfinance_base.html"
         template = "myfinance/transaction/transaction_home.html"
 
+    template = "myfinance/transaction_list.html"
+
     return render(request, template, {
         # "base_template": base_template, 
-        "page": page, "total": total_amount, "total_transactions": total_transactions})
+        "page": page, "total": total_amount, "total_transactions": total_transactions, "transactions": transactions})
 
 
 @require_http_methods(["GET", "POST"])
@@ -169,7 +205,9 @@ def add_transaction(request: HtmxHttpRequest) -> HttpResponse:
         print('Adding Transaction')
 
         if form.is_valid():
-            name = form.save()
+            transaction = form.save(commit=False)
+            transaction.user = request.user
+            transaction.save()
 
         return  redirect('myfinance:transactions')
     return render(request, template, {"form": form})
@@ -239,6 +277,16 @@ def category_view(request: HtmxHttpRequest) -> HttpResponse:
             "page": page,
         },
     )
+
+
+@login_required
+def delete_transaction(request, pk):
+    # remove the contact from list.
+    transaction_id = Transaction.objects.get(id=pk)
+    transaction_id.delete()
+
+    message = f'Transaction with id {pk} deleted'
+    return redirect('myfinance:transactions')
 
 
 @login_required

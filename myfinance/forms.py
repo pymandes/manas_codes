@@ -7,6 +7,11 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class TransactionForm(forms.ModelForm):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
     class Meta:
         #fields = []
         exclude = ['user', 'created', 'updated']
@@ -31,6 +36,11 @@ class TransactionForm(forms.ModelForm):
 
 
 class TransactionFilterForm(forms.ModelForm):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
     class Meta:
         model = Transaction
         fields = ["name", "group", "category", "comments"]
@@ -46,6 +56,11 @@ class TransactionFilterForm(forms.ModelForm):
 
 
 class CategoryForm(forms.ModelForm):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
     class Meta:
         fields = ["name", "comments"]
         model = Category
@@ -56,6 +71,11 @@ class CategoryForm(forms.ModelForm):
 
 
 class GroupForm(forms.ModelForm):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
     class Meta:
         fields = ["name", "comments"]
         model = Group

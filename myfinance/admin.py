@@ -9,6 +9,11 @@ from myfinance.models import Transaction, Category, Group
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    """_summary_
+
+    Args:
+        admin (_type_): _description_
+    """
 
     list_display = ["name", "comments", "created", "updated"]
     search_fields = ["name", "comments"]
@@ -16,6 +21,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
+    """_summary_
+
+    Args:
+        admin (_type_): _description_
+    """
 
     list_display = ["name", "comments", "created", "updated"]
     search_fields = ["name", "comments"]
@@ -23,6 +33,11 @@ class GroupAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
+    """_summary_
+
+    Args:
+        admin (_type_): _description_
+    """
 
     list_display = ["name", "amount", "paid_for", "paid_by", "paid_to", "date", "category", "comments", "updated", "user"]
     search_fields = ["name", "type", "amount", "paid_for", "paid_by", "paid_to", "category__name", "comments"]

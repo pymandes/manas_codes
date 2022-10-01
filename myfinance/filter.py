@@ -4,6 +4,11 @@ from .models import Transaction, Category, Group
 from .forms import TransactionFilterForm
 
 class TransactionFilter(django_filters.FilterSet):
+    """ This is a filterset created for Transaction Model
+
+    Args:
+        django_filters (FilterSet): _description_
+    """
 
     # category = django_filters.ModelChoiceFilter(queryset=Category)
     # category = django_filters.CharFilter(field_name='category__name', lookup_expr='iexact')

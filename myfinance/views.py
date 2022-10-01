@@ -103,29 +103,18 @@ def add_category(request: HtmxHttpRequest) -> HttpResponse:
 @require_GET
 @login_required
 def transactions(request: HtmxHttpRequest) -> HttpResponse:
+    """_summary_
+
+    Args:
+        request (HtmxHttpRequest): _description_
+
+    Returns:
+        HttpResponse: _description_
+    """
 
     transactions = TransactionFilter(request.GET, queryset=Transaction.objects.all())
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=transactions.qs, per_page=10).get_page(page_num)
-    # total_amount = Transaction.objects.aggregate(Sum('amount'))['amount__sum']
-    # total_transactions = Transaction.objects.count()
-
-    # if request.htmx:
-    #     base_template = "myfinance_partial.html"
-    #     template = "myfinance/transaction/transaction_list.html"
-    # else:
-    #     base_template = "myfinance_base.html"
-    #     template = "myfinance/transaction/transaction_home.html"
-
-    # return render(request, template, {
-    #     # "base_template": base_template, 
-    #     "page": page, "total": total_amount, "total_transactions": total_transactions})
-
-    
-
-    # queryset = Transaction.objects.annotate(search=SearchVector('name', 'comments', 'paid_to')).filter(search=name)
-    #  (Q(name__icontains=name) | Q(comments__icontains=name) | Q(paid_to__icontains=name))
-    # page = Paginator(object_list=transactions.qs, per_page=10).get_page(page_num)
 
     total_amount = transactions.qs.aggregate(Sum('amount'))['amount__sum']
     total_transactions = transactions.qs.count()
@@ -151,6 +140,14 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
 @require_GET
 @login_required
 def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
+    """_summary_
+
+    Args:
+        request (HtmxHttpRequest): _description_
+
+    Returns:
+        HttpResponse: _description_
+    """
     name = request.GET.get("name")
     after = request.GET.get("after")
     before = request.GET.get("before")
@@ -194,6 +191,14 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
 @require_http_methods(["GET", "POST"])
 @login_required
 def add_transaction(request: HtmxHttpRequest) -> HttpResponse:
+    """_summary_
+
+    Args:
+        request (HtmxHttpRequest): _description_
+
+    Returns:
+        HttpResponse: _description_
+    """
     form = TransactionForm(request.POST)
     template = "myfinance/transaction/transaction_add.html"
 
@@ -216,6 +221,14 @@ def add_transaction(request: HtmxHttpRequest) -> HttpResponse:
 @require_GET
 @login_required
 def group(request: HtmxHttpRequest) -> HttpResponse:
+    """_summary_
+
+    Args:
+        request (HtmxHttpRequest): _description_
+
+    Returns:
+        HttpResponse: _description_
+    """
 
     print('Getting groups')
 
@@ -237,6 +250,14 @@ def group(request: HtmxHttpRequest) -> HttpResponse:
 @require_POST
 @login_required
 def add_group(request: HtmxHttpRequest) -> HttpResponse:
+    """_summary_
+
+    Args:
+        request (HtmxHttpRequest): _description_
+
+    Returns:
+        HttpResponse: _description_
+    """
     form = GroupForm(request.POST)
 
     print('Adding group')
@@ -255,6 +276,14 @@ def add_group(request: HtmxHttpRequest) -> HttpResponse:
 @require_GET
 @login_required
 def category_view(request: HtmxHttpRequest) -> HttpResponse:
+    """_summary_
+
+    Args:
+        request (HtmxHttpRequest): _description_
+
+    Returns:
+        HttpResponse: _description_
+    """
     # Standard Django pagination
     page_num = request.GET.get("page", "1")
     print(page_num)
@@ -281,6 +310,15 @@ def category_view(request: HtmxHttpRequest) -> HttpResponse:
 
 @login_required
 def delete_transaction(request, pk):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+        pk (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     # remove the contact from list.
     transaction_id = Transaction.objects.get(id=pk)
     transaction_id.delete()
@@ -291,6 +329,15 @@ def delete_transaction(request, pk):
 
 @login_required
 def delete_category(request, pk):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+        pk (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     # remove the contact from list.
     category_id = Category.objects.get(id=pk)
     category_id.delete()
@@ -301,6 +348,15 @@ def delete_category(request, pk):
 
 @login_required
 def delete_group(request, pk):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+        pk (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     # remove the contact from list.
     group_id = Group.objects.get(id=pk)
     group_id.delete()
@@ -317,9 +373,6 @@ def transaction_view(request: HtmxHttpRequest) -> HttpResponse:
     print(page_num)
     page = Paginator(object_list=Transaction.objects.all(), per_page=10).get_page(page_num)
 
-    # The htmx magic - use a different, minimal base template for htmx
-    # requests, allowing us to skip rendering the unchanging parts of the
-    # template.
 
     if request.htmx:
         base_template = "myfinance_partial.html"

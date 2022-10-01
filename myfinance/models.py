@@ -3,6 +3,14 @@ from manas_codes.users.models import User
 
 # Create your models here.
 class Category(models.Model):
+    """_summary_
+
+    Args:
+        models (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     name = models.CharField(max_length = 50)
     comments = models.CharField(max_length = 2000)
     created = models.DateTimeField(auto_now_add=True, blank=True)
@@ -16,6 +24,14 @@ class Category(models.Model):
 
 
 class Group(models.Model):
+    """_summary_
+
+    Args:
+        models (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     name = models.CharField(max_length = 50, default="Hyderabad Home")
     comments = models.CharField(max_length = 2000)
     created = models.DateTimeField(auto_now_add=True, blank=True)
@@ -26,6 +42,14 @@ class Group(models.Model):
 
 
 class Transaction(models.Model):
+    """_summary_
+
+    Args:
+        models (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
 
     TRANSACTION_CHOICES = [
         ('expense', 'Expense'),

@@ -1,0 +1,104 @@
+{% load static i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 mt-3 shadow-none border-radius-xl" id="navbarTop">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'myfinance:home' %}" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
+            MyFinance
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav navbar-nav-hover ms-auto">
+                <div class="row">
+                    <div class="col-auto m-auto">
+                        <a class="cursor-pointer">
+                            <i class="fa fa-cog fixed-plugin-button-nav" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="col-auto m-auto">
+                        <div class="dropdown">
+                            <a class="cursor-pointer" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
+                                ...
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="bg-white border-radius-lg d-flex me-2">
+                            <input type="text" class="form-control border-0 ps-3" placeholder="Type here...">
+                            <button class="btn bg-gradient-primary my-1 me-1">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- <nav
+    class="navbar navbar-expand-lg navbar-light bg-white z-index-3 py-3">
+    <div class="container">
+    <a class="navbar-brand h5" href="{% url 'myfinance:home' %}" rel="tooltip" title="Manas Codes" data-placement="bottom">
+        MyFinance
+    </a>
+    <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mt-2">
+            <span class="navbar-toggler-bar bar1"></span>
+            <span class="navbar-toggler-bar bar2"></span>
+            <span class="navbar-toggler-bar bar3"></span>
+        </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navigation">
+        <ul class="navbar-nav navbar-nav-hover mx-auto">
+        <li class="nav-item px-3">
+            <a class="nav-link" href="{% url 'myfinance:transactions' %}">
+            Transactions
+            </a>
+        </li>
+
+        <li class="nav-item px-3">
+            <a class="nav-link" href="{% url 'myfinance:categories' %}">
+            Categories
+            </a>
+        </li>
+
+        <li class="nav-item px-3">
+            <a class="nav-link" href="{% url 'myfinance:groups' %}">
+            Groups
+            </a>
+        </li>
+
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+        {% if request.user.is_authenticated %}           
+            <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a class="nav-link disabled" href="{% url 'users:detail' request.user.username  %}">{{ request.user.name }}</a>
+            </li>
+            <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a class="btn bg-gradient-warning mb-0" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+            </li>
+        {% else %}
+            {% if ACCOUNT_ALLOW_REGISTRATION %}
+        <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
+        </li>
+        {% endif %}
+            <li class="nav-item">
+            {# URL provided by django-allauth/account/urls.py #}
+            <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
+            </li>
+        {% endif %}
+        </ul>
+    </div>
+    </div>
+</nav> -->

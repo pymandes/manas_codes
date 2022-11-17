@@ -1,44 +1,51 @@
 {% load crispy_forms_tags %}
-<div class="card mb-3 text-bg-light border border-0">
-  <!-- <img src="..." class="card-img" alt="..."> -->
-  <div class="card-body">
-    <h4 class="card-title mb-3 h5">Search Transactions</h4>
-    <form hx-get="/myfinance/transactions/" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#transactions">
-      <div class="row g-4">
-        <div class="col-sm-3">
-          <label for="{{ transactions.form.name.id_for_label }}" class="form-label">Name</label>
-          {{ transactions.form.name }}
-          <div class="invalid-feedback">Valid name is required.</div>
+
+<div class="card mb-4">
+  <form hx-get="/myfinance/transactions/" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#transactions">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h6 class="mb-0">Search Transactions</h6>
         </div>
-        <div class="col-sm-3">
-          <label for="{{ transactions.form.group.id_for_label }}" class="form-label">Group</label>
-          {{ transactions.form.group }}
-          <div class="invalid-feedback">Valid name is required.</div>
+        <div class="col-4 text-end">
+          <button type="submit" class="btn btn-sm bg-gradient-primary mb-0">
+            Search
+          </button>
         </div>
-        <div class="col-sm-3">
-          <label for="{{ transactions.form.category.id_for_label }}" class="form-label">Category</label>
-          {{ transactions.form.category }}
-          <div class="invalid-feedback">Valid name is required.</div>
-        </div>
-        <div class="col-sm-3">
-          <label for="{{ transactions.form.comments.id_for_label }}" class="form-label">Comments</label>
-          {{ transactions.form.comments }}
-          <div class="invalid-feedback">Valid name is required.</div>
-        </div>
-        <div class="row g-4">
-          <!-- <div class="col-sm-3">
-          <label for="{{ transactions.form.date.id_for_label }}" class="form-label">Date</label>
-          {{ transactions.form.date }}
-          <div class="invalid-feedback">Valid name is required.</div>
-        </div> -->
-          <div class="col-sm-2">
-            <button type="submit" class="form-control btn btn-primary">
-              Search
-            </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div>
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="{{ transactions.form.name.id_for_label }}" class="form-control-label">Name</label>
+              {{ transactions.form.name }}
+              <div class="invalid-feedback">Valid name is required.</div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="{{ transactions.form.group.id_for_label }}" class="form-control-label">Group</label>
+              {{ transactions.form.group }}
+              <div class="invalid-feedback">Valid name is required.</div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="{{ transactions.form.category.id_for_label }}" class="form-control-label">Group</label>
+              {{ transactions.form.category }}
+              <div class="invalid-feedback">Valid name is required.</div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="form-group">
+              <label for="{{ transactions.form.comments.id_for_label }}" class="form-control-label">Group</label>
+              {{ transactions.form.comments }}
+              <div class="invalid-feedback">Valid name is required.</div>
+            </div>
           </div>
         </div>
-    </form>
-
-  </div>
-</div>
+      </div>
+  </form>
 </div>

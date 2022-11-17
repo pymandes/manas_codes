@@ -9,7 +9,7 @@ app_name = "myfinance"
 urlpatterns = [
 
     # Home 
-    path("", TemplateView.as_view(template_name="myfinance_home.html"), name="home"),
+    path("", TemplateView.as_view(template_name="myfinance/myfinance_home.html"), name="home"),
 
     path("transactions/", transactions, name="transactions"),
     path("categories/", category, name="categories"),

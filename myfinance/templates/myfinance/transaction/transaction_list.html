@@ -1,3 +1,69 @@
+<div id="transactions" class="card mb-4">
+    <div class="card-header pb-0">
+        <h6>List of Transactions</h6>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Amount</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">From</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">To</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">For</th>
+                        <th class="text-secondary opacity-7"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in page.object_list %}
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm"> {{ transaction.name }} </h6>
+                                    <p class="text-xs text-secondary mb-0"> {{ transaction.comments }} </p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0"> {{ transaction.category }} </p>
+                            <p class="text-xs text-secondary mb-0"> {{ transaction.group }} </p>
+                        </td>
+                        <td class="text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{ transaction.type }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{ transaction.amount }}</span>
+                        </td>
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{ transaction.date|date:"d M Y" }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{ transaction.paid_by }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{ transaction.paid_to }}</span>
+                        </td>
+                        <td class="text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{ transaction.paid_for }}</span>
+                        </td>
+                        <td class="align-middle">
+                            <a href="{% url 'myfinance:delete-transaction' transaction.id %}" class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete Transaction">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <div id="transactions" class="card mb-3 text-bg-light border border-0">
     <div class="card-body">
         <div

@@ -51,7 +51,7 @@ def category(request: HtmxHttpRequest) -> HttpResponse:
         template = "myfinance/category/category_home.html"
 
     return render(request, template, {
-        # "base_template": base_template, 
+        # "base_template": base_template,
         "page": page})
 
 @require_POST
@@ -133,7 +133,7 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
     # template = "myfinance/transaction_list.html"
 
     return render(request, template, {
-        "base_template": base_template, 
+        "base_template": base_template,
          "total": total_amount, "total_transactions": total_transactions, "page": page, "transactions": transactions})
 
 
@@ -184,7 +184,7 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
     template = "myfinance/transaction_list.html"
 
     return render(request, template, {
-        # "base_template": base_template, 
+        # "base_template": base_template,
         "page": page, "total": total_amount, "total_transactions": total_transactions, "transactions": transactions})
 
 
@@ -214,7 +214,7 @@ def add_transaction(request: HtmxHttpRequest) -> HttpResponse:
             transaction.user = request.user
             transaction.save()
 
-        return  redirect('myfinance:transactions')
+        return redirect('myfinance:transactions')
     return render(request, template, {"form": form})
 
 
@@ -243,7 +243,7 @@ def group(request: HtmxHttpRequest) -> HttpResponse:
         template = "myfinance/group/group_home.html"
 
     return render(request, template, {
-        # "base_template": base_template, 
+        # "base_template": base_template,
         "page": page})
 
 

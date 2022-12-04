@@ -8,13 +8,13 @@ from myfinance.views import TransactionView, TransactionDetailView, TransactionC
 app_name = "myfinance"
 urlpatterns = [
 
-    # Home 
+    # Home
     path("", TemplateView.as_view(template_name="myfinance/myfinance_home.html"), name="home"),
 
     path("transactions/", transactions, name="transactions"),
     path("categories/", category, name="categories"),
     path("groups/", group, name="groups"),
-    path(r'^/(?P<pk>[0-9]+)/$', TransactionDetailView.as_view(), name="transaction-detail"),
+    path('transaction-detail/<int:pk>', TransactionDetailView.as_view(), name="transaction-detail"),
     path("create_transaction/", TransactionCreateView.as_view(), name="create-transaction"),
 
     # Search

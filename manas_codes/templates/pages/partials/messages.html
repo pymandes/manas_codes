@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-8 mx-auto" id="contactmessage">
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        <span class="alert-text"><strong>{{message}}</strong></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>

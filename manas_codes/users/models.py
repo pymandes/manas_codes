@@ -31,7 +31,7 @@ class User(AbstractUser):
 class ContactModel(models.Model):
     name = models.CharField(max_length = 50)
     email = models.EmailField(max_length = 150)
-    subject = models.CharField(max_length = 200)
+    subject = models.CharField(max_length = 200, blank=True)
     message = models.CharField(max_length = 2000)
     created = models.DateTimeField(auto_now_add=True, blank=True)
 

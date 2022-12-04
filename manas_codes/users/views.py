@@ -13,6 +13,10 @@ from django.http import HttpResponse, HttpRequest
 from django_htmx.middleware import HtmxDetails
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET, require_POST
+from django.contrib import messages
+import logging
+
+logger = logging.getLogger(__name__)
 
 class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
@@ -98,10 +102,22 @@ def add_contact(request: HtmxHttpRequest) -> HttpResponse:
         HttpResponse: _description_
     """
     print('Inside Add Contact')
+
     form = ContactForm(request.POST)
+    logger.debug('Checking if form is valid')
+    print(form.is_valid())
     if form.is_valid():
+        logger.debug('Form is valid')
         email = form.save()
-        print(f'Saving email contact: {email}')
-        message = 'Message Sent!!'
-    return HttpResponseRedirect('index', {'message': message})
+        logger.debug(f'Saving email contact: {email}')
+        messages.info(request, "Message Sent!!")
+        logger.info(f"Message Sent!! {email}")
+    else:
+        logger.warning("Invalid Details for Contact, please check and submit again!!")
+        messages.warning(request, "Invalid Details, please check and submit again!!")
+
+    return render(
+        request,
+        "pages/partials/messages.html"
+    )
 

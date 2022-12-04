@@ -284,3 +284,4 @@ SOCIALACCOUNT_FORMS = {"signup": "manas_codes.users.forms.UserSocialSignupForm"}
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

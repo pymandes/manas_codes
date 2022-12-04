@@ -16,8 +16,9 @@
               <div class="card card-plain">
                 <form hx-post="/users/add_contact/"
                     hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                    id="contact-form" autocomplete="off">
-                    
+                    id="contact-form" autocomplete="off"
+                    hx-target="#contactmessage">
+
                       <div class="card-body">
                           <div class="row">
                               <div class="col-md-6">

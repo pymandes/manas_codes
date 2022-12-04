@@ -49,4 +49,4 @@ class UserSocialSignupForm(SocialSignupForm):
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactModel
-        fields = "__all__"
+        fields = ['name', 'email', 'message']

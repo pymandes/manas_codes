@@ -11,7 +11,7 @@ SECRET_KEY = env(
     default="7FFGyjXvG9G7j7yQGEihi5K7A9il3QefeC1X6Ybxyluc1FcK4bX8I0NIHkltDd56",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.1.18", "192.168.1.51"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.1.18", "192.168.1.51", "manascodes.azurewebsites.net"]
 
 # CACHES
 # ------------------------------------------------------------------------------

@@ -10,12 +10,17 @@ from myfinance.forms import CategoryForm, GroupForm, TransactionForm
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.db.models import Q, Sum
 from django.contrib.auth.decorators import login_required
-from django.contrib.postgres.search import SearchVector, SearchRank
+import csv
 
 from .filter import TransactionFilter
 
 from django_htmx.middleware import HtmxDetails
 from django.core.paginator import Paginator
+
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 # Create your views here.
 # Typing pattern recommended by django-stubs:
@@ -112,6 +117,7 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
         HttpResponse: _description_
     """
 
+    form = TransactionForm
     transactions = TransactionFilter(request.GET, queryset=Transaction.objects.all())
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=transactions.qs, per_page=10).get_page(page_num)
@@ -119,14 +125,14 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
     total_amount = transactions.qs.aggregate(Sum('amount'))['amount__sum']
     total_transactions = transactions.qs.count()
 
-    print(f'Total: {total_amount}, transactions: {total_transactions}')
+    logger.info(f'Total: {total_amount}, transactions: {total_transactions}')
 
     if request.htmx:
-        print("HTMX request")
+        logger.debug("HTMX request")
         base_template = "myfinance_partial.html"
         template = "myfinance/transaction/transaction_list.html"
     else:
-        print("Normal request")
+        logger.debug("Normal request")
         base_template = "myfinance_base.html"
         template = "myfinance/transaction/transaction_home.html"
 
@@ -134,7 +140,12 @@ def transactions(request: HtmxHttpRequest) -> HttpResponse:
 
     return render(request, template, {
         "base_template": base_template,
-         "total": total_amount, "total_transactions": total_transactions, "page": page, "transactions": transactions})
+        "total": total_amount,
+        "total_transactions": total_transactions,
+        "page": page,
+        "transactions": transactions,
+        "form": form
+        })
 
 
 @require_GET
@@ -172,7 +183,7 @@ def search_transaction(request: HtmxHttpRequest) -> HttpResponse:
     total_amount = transactions.qs.aggregate(Sum('amount'))['amount__sum']
     total_transactions = transactions.qs.count()
 
-    print(f'Total: {total_amount}, transactions: {total_transactions}')
+    logger.debug(f'Total: {total_amount}, transactions: {total_transactions}')
 
     if request.htmx:
         base_template = "myfinance_partial.html"
@@ -203,11 +214,11 @@ def add_transaction(request: HtmxHttpRequest) -> HttpResponse:
     template = "myfinance/transaction/transaction_add.html"
 
     if request.method == 'GET':
-        print('Get Request')
+        logger.debug('Get Request')
 
     else:
 
-        print('Adding Transaction')
+        logger.debug('Adding Transaction')
 
         if form.is_valid():
             transaction = form.save(commit=False)
@@ -230,7 +241,7 @@ def group(request: HtmxHttpRequest) -> HttpResponse:
         HttpResponse: _description_
     """
 
-    print('Getting groups')
+    logger.debug('Getting groups')
 
     page_num = request.GET.get("page", "1")
     page = Paginator(object_list=Group.objects.all(), per_page=10).get_page(page_num)
@@ -260,7 +271,7 @@ def add_group(request: HtmxHttpRequest) -> HttpResponse:
     """
     form = GroupForm(request.POST)
 
-    print('Adding group')
+    logger.debug('Adding group')
 
     if form.is_valid():
         name = form.save()
@@ -286,7 +297,7 @@ def category_view(request: HtmxHttpRequest) -> HttpResponse:
     """
     # Standard Django pagination
     page_num = request.GET.get("page", "1")
-    print(page_num)
+    logger.debug(page_num)
     page = Paginator(object_list=Category.objects.all(), per_page=10).get_page(page_num)
 
     # The htmx magic - use a different, minimal base template for htmx
@@ -324,6 +335,7 @@ def delete_transaction(request, pk):
     transaction_id.delete()
 
     message = f'Transaction with id {pk} deleted'
+    logger.info(message)
     return redirect('myfinance:transactions')
 
 
@@ -343,6 +355,7 @@ def delete_category(request, pk):
     category_id.delete()
 
     message = f'Category with id {pk} deleted'
+    logger.info(message)
     return redirect('myfinance:categories')
 
 
@@ -362,6 +375,7 @@ def delete_group(request, pk):
     group_id.delete()
 
     message = f'Group with id {pk} deleted'
+    logger.info(message)
     return redirect('myfinance:groups')
 
 
@@ -372,7 +386,6 @@ def transaction_view(request: HtmxHttpRequest) -> HttpResponse:
     page_num = request.GET.get("page", "1")
     print(page_num)
     page = Paginator(object_list=Transaction.objects.all(), per_page=10).get_page(page_num)
-
 
     if request.htmx:
         base_template = "myfinance_partial.html"
@@ -387,3 +400,28 @@ def transaction_view(request: HtmxHttpRequest) -> HttpResponse:
             "page": page,
         },
     )
+
+
+# @require_GET
+# @login_required
+# def export_as_csv(request, queryset):
+#     """_summary_
+#     Args:
+#         request (_type_): _description_
+#         queryset (_type_): _description_
+#     Returns:
+#         _type_: _description_
+#     """
+#     logging.debug(f'Loading ExportCsvMixin for {request.user.name}')
+#
+#     # field_names = [field.name for field in meta.fields]
+#
+#     response = HttpResponse(content_type='text/csv')
+#     response['Content-Disposition'] = 'attachment; filename={}.csv'.format(queryset)
+#     writer = csv.writer(response)
+#
+#     # writer.writerow(field_names)
+#     # for obj in queryset:
+#     #     row = writer.writerow([getattr(obj, field) for field in field_names])
+#
+#     return response

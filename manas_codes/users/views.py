@@ -101,7 +101,7 @@ def add_contact(request: HtmxHttpRequest) -> HttpResponse:
     Returns:
         HttpResponse: _description_
     """
-    print('Inside Add Contact')
+    logger.debug('Inside Add Contact')
 
     form = ContactForm(request.POST)
     logger.debug('Checking if form is valid')

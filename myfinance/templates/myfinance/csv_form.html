@@ -1,0 +1,31 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n admin_urls static %}
+
+
+{% block content_title %}
+<h1>Upload CSV File</h1>
+{% endblock %}
+
+{% block bodyclass %}
+{{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+
+<div>
+    <form class="login" action="." method="POST" enctype="multipart/form-data">
+        <!-- <div class="mb-3">
+            <label for="id_csv_file" class="form-label">Choose File: </label>
+            <input class="form-control" type="file" id="id_csv_file" required name="id_csv_file">
+        </div> -->
+        {{ form.as_p }}
+        {% csrf_token %}
+        <div class="submit-row">
+            <input type="submit" value="Upload" name="_make-unique">
+        </div>
+        <!-- <button type="submit" class="default">Upload CSV</button> -->
+    </form>
+</div>
+
+{% endblock %}

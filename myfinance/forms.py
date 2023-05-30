@@ -83,3 +83,12 @@ class GroupForm(forms.ModelForm):
             "name": forms.TextInput(attrs={"class": "form-control"}),
             "comments": forms.Textarea(attrs={"class": "form-control"}),
         }
+
+
+class CsvImportForm(forms.Form):
+    """_summary_
+
+    Args:
+        forms (_type_): _description_
+    """
+    csv_file = forms.FileField()

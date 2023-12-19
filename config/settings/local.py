@@ -86,7 +86,7 @@ LOGGING = {
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         # Comment or uncomment below based on requirement
         # "OPTIONS": {"options": "-c search_path=" + env("DATABASE_SCHEMA")},
         "OPTIONS": {"sslmode": "require"},

@@ -11,7 +11,14 @@ SECRET_KEY = env(
     default="7FFGyjXvG9G7j7yQGEihi5K7A9il3QefeC1X6Ybxyluc1FcK4bX8I0NIHkltDd56",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.1.18", "192.168.1.51", "manascodes.azurewebsites.net"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "0.0.0.0",
+    "127.0.0.1",
+    "192.168.1.18",
+    "192.168.1.51",
+    "manascodes.azurewebsites.net",
+]
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -78,16 +85,14 @@ LOGGING = {
 }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'OPTIONS': {
-            'options': '-c search_path=' + env("DATABASE_SCHEMA")
-        },
-
-        'NAME': env("DATABASE_NAME"),
-        'USER': env("DATABASE_USER"),
-        'PASSWORD': env("DATABASE_PASSWORD"),
-        'HOST': env("DATABASE_HOST"),
-        'PORT': env("DATABASE_PORT"),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        # Comment or uncomment below based on requirement
+        # "OPTIONS": {"options": "-c search_path=" + env("DATABASE_SCHEMA")},
+        "NAME": env("DATABASE_NAME"),
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
+        "HOST": env("DATABASE_HOST"),
+        "PORT": env("DATABASE_PORT"),
     }
 }

@@ -15,8 +15,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "OPTIONS": {
-            # 'options': '-c search_path=' + env("DATABASE_SCHEMA"),
-            "sslmode": "require"
+            "options": "-c search_path=" + env("DATABASE_SCHEMA"),
+            "sslmode": "require",
         },
         "NAME": env("DATABASE_NAME"),
         "USER": env("DATABASE_USER"),

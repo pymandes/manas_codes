@@ -89,7 +89,10 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         # Comment or uncomment below based on requirement
         # "OPTIONS": {"options": "-c search_path=" + env("DATABASE_SCHEMA")},
-        # "OPTIONS": {"sslmode": "require"},
+        "OPTIONS": {
+            "options": "-c search_path=" + env("DATABASE_SCHEMA"),
+            "sslmode": "require",
+        },
         "NAME": env("DATABASE_NAME"),
         "USER": env("DATABASE_USER"),
         "PASSWORD": env("DATABASE_PASSWORD"),

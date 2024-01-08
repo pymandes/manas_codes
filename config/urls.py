@@ -6,19 +6,25 @@ from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from manas_codes.users.views import HomepageView
 
-urlpatterns = [
-    path("", HomepageView, name="index"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
-    # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
-    # User management
-    path("users/", include("manas_codes.users.urls", namespace="users")),
-    path("accounts/", include("allauth.urls")),
-    path("myfinance/", include("myfinance.urls", namespace="myfinance")),
-    # Your stuff: custom urls includes go here
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = (
+    [
+        path("", HomepageView, name="index"),
+        path(
+            "about/",
+            TemplateView.as_view(template_name="pages/about.html"),
+            name="about",
+        ),
+        # Django Admin, use {% url 'admin:index' %}
+        path(settings.ADMIN_URL, admin.site.urls),
+        # User management
+        path("users/", include("manas_codes.users.urls", namespace="users")),
+        path("accounts/", include("allauth.urls")),
+        path("myfinance/", include("myfinance.urls", namespace="myfinance")),
+        # Your stuff: custom urls includes go here
+    ]
+    # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)
 
 
 if settings.DEBUG:

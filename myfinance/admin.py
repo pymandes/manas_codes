@@ -212,6 +212,7 @@ class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
 
     list_display = [
         "name",
+        "type",
         "amount",
         "paid_for",
         "paid_by",
@@ -220,8 +221,6 @@ class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
         "category",
         "group",
         "comments",
-        "created",
-        "updated",
         "user",
     ]
     search_fields = [
@@ -232,6 +231,7 @@ class TransactionAdmin(admin.ModelAdmin, ExportCsvMixin):
         "paid_by",
         "paid_to",
         "category__name",
+        "group__name",
         "comments",
     ]
     # exclude = ["user"]
